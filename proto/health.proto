@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package health;
+
+option go_package = "protos/pb/health";
+
+ message CreateHealthRequest{
+   string id =1;
+   string player_id =2;
+   string data_sustained_injury =3;
+   string date_to_be_healed =4;
+   string injury_status =5;
+   string health_status =6;
+}
+
+message GetDateToBeFineRequest{
+   string player_id =1;
+}
+
+message GetDateToBeFineResponse{
+  string date_to_be_healed =1;
+}
+
+message UpdateHealthRequest{
+  string player_id =2;
+  string data_sustained_injury =3;
+  string date_to_be_healed =4;
+  string injury_status =5;
+  string health_status =6;
+}
+
+message Health{
+  string player_id =2;
+  string data_sustained_injury =3;
+  string date_to_be_healed =4;
+  string injury_status =5;
+  string health_status =6;
+}
+
+message DeleteHealthRequest{
+   string player_id =1;
+}
+
+message Empty{
+
+}
+
+//Define the service interface
+
+service HealthServices{
+  rpc CreateHealth(CreateHealthRequest) returns (Health);
+  rpc UpdateHealth(UpdateHealthRequest) returns(Health);
+  rpc GetDateToBeHealthy(GetDateToBeFineRequest) returns(GetDateToBeFineResponse);
+  rpc DeleteHealth(DeleteHealthRequest) returns(Empty);
+
+ }
